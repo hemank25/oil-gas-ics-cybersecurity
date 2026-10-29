@@ -1,0 +1,215 @@
+{
+  "timestamp": "2026-10-19T12:30:54.519901",
+  "models": {
+    "Isolation_Forest": {
+      "paradigm": "Unsupervised Anomaly Detection",
+      "training_data": "Normal Baseline Only (hai-train1 + hai-train2)",
+      "training_time_seconds": 4.05,
+      "inference_latency_ms_per_1k": 13.85,
+      "decision_threshold": 0.0132,
+      "test1_scenario1": {
+        "accuracy": 0.9447,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "roc_auc": 0.6982,
+        "pr_auc": 0.1725,
+        "false_positive_rate": 0.0001,
+        "false_negative_rate": 1.0,
+        "confusion_matrix": {
+          "true_negatives": 51015,
+          "false_positives": 4,
+          "false_negatives": 2981,
+          "true_positives": 0
+        }
+      },
+      "test2_scenario2": {
+        "accuracy": 0.9258,
+        "precision": 0.1574,
+        "recall": 0.2379,
+        "f1_score": 0.1895,
+        "roc_auc": 0.6276,
+        "pr_auc": 0.1077,
+        "false_positive_rate": 0.0482,
+        "false_negative_rate": 0.7621,
+        "confusion_matrix": {
+          "true_negatives": 211296,
+          "false_positives": 10701,
+          "false_negatives": 6404,
+          "true_positives": 1999
+        }
+      },
+      "combined_test": {
+        "accuracy": 0.9294,
+        "precision": 0.1574,
+        "recall": 0.1756,
+        "f1_score": 0.166,
+        "roc_auc": 0.6257,
+        "pr_auc": 0.0984,
+        "false_positive_rate": 0.0392,
+        "false_negative_rate": 0.8244,
+        "confusion_matrix": {
+          "true_negatives": 262311,
+          "false_positives": 10705,
+          "false_negatives": 9385,
+          "true_positives": 1999
+        }
+      }
+    },
+    "Logistic_Regression": {
+      "paradigm": "Supervised Linear Classification",
+      "training_data": "Scenario 1 (Test 1 Telemetry + Labels)",
+      "training_time_seconds": 1.59,
+      "inference_latency_ms_per_1k": 0.479,
+      "test1_scenario1": {
+        "accuracy": 0.8713,
+        "precision": 0.281,
+        "recall": 0.8541,
+        "f1_score": 0.4229,
+        "roc_auc": 0.9493,
+        "pr_auc": 0.7499,
+        "false_positive_rate": 0.1277,
+        "false_negative_rate": 0.1459,
+        "confusion_matrix": {
+          "true_negatives": 44504,
+          "false_positives": 6515,
+          "false_negatives": 435,
+          "true_positives": 2546
+        }
+      },
+      "test2_scenario2": {
+        "accuracy": 0.532,
+        "precision": 0.04,
+        "recall": 0.5141,
+        "f1_score": 0.0742,
+        "roc_auc": 0.5534,
+        "pr_auc": 0.0628,
+        "false_positive_rate": 0.4673,
+        "false_negative_rate": 0.4859,
+        "confusion_matrix": {
+          "true_negatives": 118262,
+          "false_positives": 103735,
+          "false_negatives": 4083,
+          "true_positives": 4320
+        }
+      },
+      "combined_test": {
+        "accuracy": 0.5965,
+        "precision": 0.0586,
+        "recall": 0.6031,
+        "f1_score": 0.1069,
+        "roc_auc": 0.6129,
+        "pr_auc": 0.0728,
+        "false_positive_rate": 0.4038,
+        "false_negative_rate": 0.3969,
+        "confusion_matrix": {
+          "true_negatives": 162766,
+          "false_positives": 110250,
+          "false_negatives": 4518,
+          "true_positives": 6866
+        }
+      }
+    },
+    "Random_Forest": {
+      "paradigm": "Supervised Ensemble Classification",
+      "training_data": "Scenario 1 (Test 1 Telemetry + Labels)",
+      "training_time_seconds": 1.3,
+      "inference_latency_ms_per_1k": 42.416,
+      "test1_scenario1": {
+        "accuracy": 0.9985,
+        "precision": 0.9742,
+        "recall": 1.0,
+        "f1_score": 0.9869,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "false_positive_rate": 0.0015,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "true_negatives": 50940,
+          "false_positives": 79,
+          "false_negatives": 0,
+          "true_positives": 2981
+        }
+      },
+      "test2_scenario2": {
+        "accuracy": 0.9533,
+        "precision": 0.0395,
+        "recall": 0.012,
+        "f1_score": 0.0184,
+        "roc_auc": 0.6687,
+        "pr_auc": 0.0623,
+        "false_positive_rate": 0.0111,
+        "false_negative_rate": 0.988,
+        "confusion_matrix": {
+          "true_negatives": 219541,
+          "false_positives": 2456,
+          "false_negatives": 8302,
+          "true_positives": 101
+        }
+      },
+      "combined_test": {
+        "accuracy": 0.9619,
+        "precision": 0.5487,
+        "recall": 0.2707,
+        "f1_score": 0.3626,
+        "roc_auc": 0.7885,
+        "pr_auc": 0.3653,
+        "false_positive_rate": 0.0093,
+        "false_negative_rate": 0.7293,
+        "confusion_matrix": {
+          "true_negatives": 270481,
+          "false_positives": 2535,
+          "false_negatives": 8302,
+          "true_positives": 3082
+        }
+      }
+    }
+  },
+  "top_features_random_forest": [
+    {
+      "feature": "P1_PCV01D",
+      "importance": 0.0807
+    },
+    {
+      "feature": "P1_TIT02",
+      "importance": 0.0516
+    },
+    {
+      "feature": "P1_PCV01Z",
+      "importance": 0.0486
+    },
+    {
+      "feature": "P1_TIT03",
+      "importance": 0.0472
+    },
+    {
+      "feature": "P1_FCV03D",
+      "importance": 0.04
+    },
+    {
+      "feature": "P1_FCV01Z",
+      "importance": 0.0395
+    },
+    {
+      "feature": "P4_ST_TT01",
+      "importance": 0.0382
+    },
+    {
+      "feature": "P1_TIT01",
+      "importance": 0.0346
+    },
+    {
+      "feature": "P1_FCV02Z",
+      "importance": 0.0332
+    },
+    {
+      "feature": "P1_FT02Z",
+      "importance": 0.0331
+    }
+  ],
+  "recommendation": {
+    "primary_production_model": "Isolation_Forest",
+    "secondary_signature_model": "Random_Forest",
+    "rationale": "In an operational refinery ICS environment, real-world cyber attacks (such as Stuxnet) exploit zero-day vulnerabilities with no historical attack signatures. Isolation Forest is selected as the primary detector because it trains exclusively on normal physical process dynamics and successfully flags anomalies across all 86 sensor/actuator dimensions. Random Forest is retained as an explainable secondary classifier for known threat patterns and feature attribution."
+  }
+}

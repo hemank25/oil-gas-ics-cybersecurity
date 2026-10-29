@@ -1,5 +1,8 @@
 # HAI dataset
 ai detection/dataset/raw/*.csv
+ai detection/dataset/processed/*.csv
+ai detection/dataset/processed/*.parquet
+ai detection/dataset/processed/*.npz
 
 # Python
 __pycache__/

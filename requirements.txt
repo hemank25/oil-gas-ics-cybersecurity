@@ -1,0 +1,15 @@
+# Core Data Processing & Numerical Computing
+pandas>=2.2.0
+numpy>=1.26.0
+
+# Machine Learning & Anomaly Detection
+scikit-learn>=1.5.0
+joblib>=1.4.0
+
+# Visualization & Reporting
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.20.0
+
+# Interactive Dashboard & Prediction Interface
+streamlit>=1.35.0

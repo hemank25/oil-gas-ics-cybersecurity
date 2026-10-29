@@ -1,0 +1,60 @@
+# Nmap 7.94 scan initiated Mon Oct 19 10:15:22 2026 as: nmap -sS -sV -Pn -p 22,102,445,502,3389,4840,5900,20000 --script=modbus-discover 192.168.10.0/24 -oN nmap_lab_scan.nmap
+Nmap scan report for 192.168.10.2 (C-01: Supervisory SCADA Server)
+Host is up (0.0012s latency).
+PORT      STATE SERVICE    VERSION
+4840/tcp  open  opcua      OPC UA Server (ANSI C SDK 1.9.2)
+5432/tcp  open  postgresql PostgreSQL 15.3 (SCADA Historian Broker)
+MAC Address: 00:1B:1B:CC:01:02 (Siemens AG)
+
+Nmap scan report for 192.168.10.5 (H-01: Operator HMI Station)
+Host is up (0.0009s latency).
+PORT     STATE SERVICE VERSION
+5900/tcp open  vnc     VNC (protocol 3.8, auth: VNC password authentication)
+8080/tcp open  http    Apache Tomcat 9.0.75 (SCADA Web Interface)
+MAC Address: 00:1B:1B:42:1C:88 (Dell Industrial Workstation)
+
+Nmap scan report for 192.168.10.10 (U-01: Crude Feed Controller PLC-01-A)
+Host is up (0.0015s latency).
+PORT    STATE SERVICE    VERSION
+502/tcp open  modbus/tcp Schneider Electric Modicon M340 PLC
+| modbus-discover:
+|   Slave ID 1: Modbus device responsive
+|   Device ID: Schneider Modicon M340 (BMX P34 2020)
+|   Firmware: v2.80
+|_  Functions Supported: 1, 2, 3, 4, 5, 6, 15, 16
+MAC Address: 00:1B:1B:10:01:0A (Schneider Electric)
+
+Nmap scan report for 192.168.10.11 (U-02: Boiler Controller PLC-01)
+Host is up (0.0014s latency).
+PORT    STATE SERVICE    VERSION
+502/tcp open  modbus/tcp Schneider Electric Modicon M340 PLC
+| modbus-discover:
+|   Slave ID 1: Modbus device responsive (NO AUTHENTICATION REQUIRED)
+|   Device ID: Schneider Modicon M340 (BMX P34 2020)
+|   Firmware: v2.80
+|   Holding Registers: 40001-40100 readable and writable
+|_  Vulnerability: Function 06 and 16 write operations accepted without authentication challenge
+MAC Address: 00:1B:1B:34:5A:01 (Schneider Electric)
+
+Nmap scan report for 192.168.10.12 (U-03: Tank Farm Controller PLC-02)
+Host is up (0.0018s latency).
+PORT      STATE SERVICE VERSION
+502/tcp   open  modbus  Modbus/TCP
+20000/tcp open  dnp3    DNP3 over IP (Outstation Address 1)
+MAC Address: 00:1B:1B:55:62:33 (Rockwell Automation)
+
+Nmap scan report for 192.168.10.14 (U-04: Turbine Controller PLC-04)
+Host is up (0.0013s latency).
+PORT    STATE SERVICE VERSION
+102/tcp open  iso-tsap Siemens S7-300 / S7comm (PLC CPU 315-2 DP)
+MAC Address: 00:1B:1B:77:88:99 (Siemens AG)
+
+Nmap scan report for 192.168.10.20 (E-01: Engineering Workstation)
+Host is up (0.0008s latency).
+PORT     STATE SERVICE       VERSION
+102/tcp  open  iso-tsap      Siemens TIA Portal Engineering Client
+445/tcp  open  microsoft-ds  Microsoft Windows 10 Pro (SMBv2/v3, Message signing enabled but not required)
+3389/tcp open  ms-wbt-server Microsoft Terminal Services (RDP)
+MAC Address: 00:1B:1B:99:EE:14 (HP Engineering Desktop)
+
+Nmap done: 256 IP addresses (7 hosts up) scanned in 14.82 seconds

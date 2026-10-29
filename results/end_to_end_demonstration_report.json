@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-10-19T12:56:34.528560",
+  "stages": {
+    "stage_1_environment": {
+      "architecture": "Simulated Refinery OT Network (Purdue Level 1/2)",
+      "vapt_finding_referenced": "VAPT-2026-001",
+      "target_asset": "PLC-01: Boiler Feedwater Controller (192.168.10.11)",
+      "status": "Vulnerable to Unauthenticated Modbus Function 06 Writes"
+    },
+    "stage_2_normal_activity": {
+      "telemetry": {
+        "P1_PCV01D": 27.965,
+        "P1_PCV01Z": 28.411,
+        "P1_PIT01": 1.113,
+        "P1_FCV01D": 32.105,
+        "P1_FCV01Z": 31.7,
+        "P1_LIT01": 351.968,
+        "P1_TIT01": 30.265,
+        "P4_ST_GOV": 18139.169,
+        "P4_ST_TT01": 26763.857,
+        "P2_24Vdc": 28.035
+      },
+      "evaluation": {
+        "timestamp": "2026-10-19 13:00:00",
+        "threat_classification": "NOMINAL: PLANT HEALTHY",
+        "action_priority": "ROUTINE MONITORING",
+        "correlation_summary": "All network traffic and physical telemetry correlate within normal bounds.",
+        "physical_ai_detection": {
+          "prediction": "NORMAL",
+          "severity": "INFORMATIONAL",
+          "anomaly_score": -0.0978,
+          "rf_confidence_pct": 7.0,
+          "top_sensors": [
+            {
+              "tag": "P4_ST_TT01",
+              "raw_value": 26763.857,
+              "z_score_deviation": 2.73
+            },
+            {
+              "tag": "P1_LIT01",
+              "raw_value": 351.968,
+              "z_score_deviation": 0.09
+            },
+            {
+              "tag": "P1_TIT01",
+              "raw_value": 30.265,
+              "z_score_deviation": 0.09
+            }
+          ]
+        },
+        "network_intrusion_detection": {
+          "network_alert": false,
+          "summary": "No anomalous network traffic detected on OT subnet.",
+          "event_details": {
+            "src_ip": "192.168.10.5",
+            "dest_ip": "192.168.10.11",
+            "dest_port": 502,
+            "protocol": "Modbus/TCP",
+            "modbus_fc": 3,
+            "unauthorized": false,
+            "description": "Routine SCADA Master cyclic telemetry poll"
+          }
+        },
+        "vapt_correlation": {
+          "known_vulnerabilities_on_targeted_assets": [
+            {
+              "finding_id": "VAPT-2026-002",
+              "asset": "HMI-01: Main Refinery Control Console",
+              "ip": "192.168.10.5",
+              "service": "VNC Remote Desktop (Port 5900/TCP)",
+              "vulnerability": "Weak Credential and Unencrypted Remote Management",
+              "severity": "HIGH",
+              "cvss": 8.1,
+              "status": "MITIGATED",
+              "correlated_tags": [
+                "P1_TIT01"
+              ]
+            },
+            {
+              "finding_id": "VAPT-2026-003",
+              "asset": "EWS-01: Engineering Workstation",
+              "ip": "192.168.10.20",
+              "service": "SMBv2 / Windows Remote Management (Port 445/TCP)",
+              "vulnerability": "Missing Patch on Workstation OS (Potential Stuxnet-Style Lateral Ingress)",
+              "severity": "HIGH",
+              "cvss": 7.8,
+              "status": "PENDING_RETEST",
+              "correlated_tags": [
+                "P4_ST_TT01"
+              ]
+            }
+          ]
+        },
+        "architectural_disclaimer": "ARCHITECTURAL INTEGRITY NOTICE: HAI 23.05 telemetry consists of 86 physical process measurements (temperatures, pressures, flow rates, valve positions). Network-flow data (packet headers, Modbus function codes, TCP flags) represents an entirely different feature space. In compliance with scientific rigor, network packets are NOT fed into the HAI model. Instead, network events and physical telemetry anomalies are cross-correlated at this integration layer."
+      }
+    },
+    "stage_3_attack_simulation": {
+      "injected_packet": {
+        "src_ip": "192.168.10.99",
+        "dest_ip": "192.168.10.11",
+        "dest_port": 502,
+        "protocol": "Modbus/TCP",
+        "modbus_fc": 6,
+        "register": 40001,
+        "injected_value": 88.0,
+        "unauthorized": true,
+        "description": "Exploiting unauthenticated Modbus service (VAPT-2026-001) to force valve setpoint"
+      },
+      "induced_telemetry": {
+        "P1_PCV01D": 88.0,
+        "P1_PCV01Z": 86.5,
+        "P1_PIT01": 2.95,
+        "P1_FCV01D": 32.12,
+        "P1_FCV01Z": 31.95,
+        "P1_LIT01": 349.36,
+        "P1_TIT01": 58.0,
+        "P4_ST_GOV": 18135.0,
+        "P4_ST_TT01": 27106.0,
+        "P2_24Vdc": 28.035
+      }
+    },
+    "stage_4_data_collection": {
+      "timestamp": "2026-10-19 13:02:15",
+      "collected_features": {
+        "P1_PCV01D": 88.0,
+        "P1_PCV01Z": 86.5,
+        "P1_PIT01": 2.95,
+        "P1_FCV01D": 32.12,
+        "P1_FCV01Z": 31.95,
+        "P1_LIT01": 349.36,
+        "P1_TIT01": 58.0,
+        "P4_ST_GOV": 18135.0,
+        "P4_ST_TT01": 27106.0,
+        "P2_24Vdc": 28.035
+      }
+    },
+    "stage_5_ai_detection": {
+      "timestamp": "2026-10-19 13:02:15",
+      "threat_classification": "CRITICAL: COORDINATED CYBER-PHYSICAL ATTACK",
+      "action_priority": "IMMEDIATE EMERGENCY ISOLATION (MANUAL)",
+      "correlation_summary": "CONFIRMED MULTI-STAGE EXPLOIT: Network-layer unauthorized Modbus command was immediately followed by severe physical process anomaly on target PLC valve/sensor loop. High confidence adversary action.",
+      "physical_ai_detection": {
+        "prediction": "SUSPICIOUS",
+        "severity": "CRITICAL",
+        "anomaly_score": -0.0577,
+        "rf_confidence_pct": 44.7,
+        "top_sensors": [
+          {
+            "tag": "P1_PCV01D",
+            "raw_value": 88.0,
+            "z_score_deviation": 24.31
+          },
+          {
+            "tag": "P1_PCV01Z",
+            "raw_value": 86.5,
+            "z_score_deviation": 23.31
+          },
+          {
+            "tag": "P1_TIT01",
+            "raw_value": 58.0,
+            "z_score_deviation": 21.26
+          }
+        ]
+      },
+      "network_intrusion_detection": {
+        "network_alert": true,
+        "summary": "Unauthorized Modbus Function 6 write from unauthenticated host 192.168.10.99 to PLC 192.168.10.11.",
+        "event_details": {
+          "src_ip": "192.168.10.99",
+          "dest_ip": "192.168.10.11",
+          "dest_port": 502,
+          "protocol": "Modbus/TCP",
+          "modbus_fc": 6,
+          "register": 40001,
+          "injected_value": 88.0,
+          "unauthorized": true,
+          "description": "Exploiting unauthenticated Modbus service (VAPT-2026-001) to force valve setpoint"
+        }
+      },
+      "vapt_correlation": {
+        "known_vulnerabilities_on_targeted_assets": [
+          {
+            "finding_id": "VAPT-2026-001",
+            "asset": "PLC-01: Boiler Feedwater Controller",
+            "ip": "192.168.10.11",
+            "service": "Modbus TCP (Port 502/TCP)",
+            "vulnerability": "Unauthenticated Modbus/TCP Function Code Execution",
+            "severity": "CRITICAL",
+            "cvss": 9.8,
+            "status": "MITIGATED",
+            "correlated_tags": [
+              "P1_PCV01D",
+              "P1_PCV01Z"
+            ]
+          },
+          {
+            "finding_id": "VAPT-2026-002",
+            "asset": "HMI-01: Main Refinery Control Console",
+            "ip": "192.168.10.5",
+            "service": "VNC Remote Desktop (Port 5900/TCP)",
+            "vulnerability": "Weak Credential and Unencrypted Remote Management",
+            "severity": "HIGH",
+            "cvss": 8.1,
+            "status": "MITIGATED",
+            "correlated_tags": [
+              "P1_TIT01"
+            ]
+          }
+        ]
+      },
+      "architectural_disclaimer": "ARCHITECTURAL INTEGRITY NOTICE: HAI 23.05 telemetry consists of 86 physical process measurements (temperatures, pressures, flow rates, valve positions). Network-flow data (packet headers, Modbus function codes, TCP flags) represents an entirely different feature space. In compliance with scientific rigor, network packets are NOT fed into the HAI model. Instead, network events and physical telemetry anomalies are cross-correlated at this integration layer."
+    },
+    "stage_6_security_alert": {
+      "alert_id": "ALT-20261019-FB09DF",
+      "timestamp": "2026-10-19 13:02:15",
+      "detection_result": "SUSPICIOUS_ACTIVITY_DETECTED",
+      "severity": "CRITICAL",
+      "detection_rationale": "Acute physical sensor divergence (24.3 sigma on P1_PCV01D)",
+      "anomaly_score": -0.0577,
+      "alert_threshold": 0.0132,
+      "supervised_attack_confidence_percent": 44.7,
+      "affected_subsystems": [
+        "Process Unit 1: Water Treatment & Steam Boiler Feed Loop"
+      ],
+      "deviating_sensors": [
+        {
+          "tag": "P1_PCV01D",
+          "raw_value": 88.0,
+          "z_score_deviation": 24.31
+        },
+        {
+          "tag": "P1_PCV01Z",
+          "raw_value": 86.5,
+          "z_score_deviation": 23.31
+        },
+        {
+          "tag": "P1_TIT01",
+          "raw_value": 58.0,
+          "z_score_deviation": 21.26
+        }
+      ],
+      "primary_deviating_sensor": "P1_PCV01D",
+      "mitigation_recommendation": "1. Dispatch field operator to visually inspect instrumentation loop around 'P1_PCV01D'. | 2. Cross-reference SCADA HMI values against physical pressure/temperature gauges. | 3. Review Engineering Workstation audit logs for unauthorized PLC ladder logic changes. | 4. Prepare manual bypass line if pneumatic actuator displays mechanical oscillation. | 5. Notify Plant Cybersecurity Incident Response Team (CSIRT).",
+      "operator_status": "UNACKNOWLEDGED",
+      "safety_disclaimer": "ADVISORY NOTICE: This output is a statistical machine learning prediction and not definitive proof of an active cyber attack. In compliance with ICS safety standards, automated physical plant actions are disabled. All alerts require human operator verification."
+    },
+    "stage_7_mitigation": {
+      "firewall_rule_applied": "DROP TCP 192.168.10.99 -> 192.168.10.11:502",
+      "plc_setpoint_restored": "P1_PCV01D = 12.5%",
+      "mitigation_time": "2026-10-19 13:05:00",
+      "authorized_by": "Lead Control Room Operator & Group Leader"
+    },
+    "stage_8_retesting": {
+      "retest_timestamp": "2026-10-19 13:08:00",
+      "threat_assessment": "NOMINAL: PLANT HEALTHY",
+      "ai_prediction": "NORMAL",
+      "re_test_verdict": "SUCCESS: Exploit neutralized, plant telemetry restored to nominal stability."
+    }
+  }
+}

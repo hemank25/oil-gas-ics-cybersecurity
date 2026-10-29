@@ -1,0 +1,46 @@
+[
+  {
+    "incident_id": "INC-001",
+    "start_time": "2022-08-12 22:47:01",
+    "end_time": "2022-08-12 22:57:23",
+    "duration_seconds": 623,
+    "peak_severity": "CRITICAL",
+    "peak_anomaly_score": 0.0071,
+    "peak_supervised_prob": 99.99,
+    "subsystems": [
+      "Process Unit 1: Water Treatment & Steam Boiler Feed Loop",
+      "Process Unit 2: Storage Tanks & Emergency Isolation Loop",
+      "Process Unit 4: Rotating Equipment & Turbine Drive",
+      "Supervisory Controller: Interlock Loop 1"
+    ],
+    "flagged_sensors": [
+      "P1_PCV01D",
+      "P1_PCV01Z",
+      "P1_PIT01",
+      "P2_SCST",
+      "P4_HT_FD",
+      "P4_ST_FD",
+      "P4_ST_GOV",
+      "P4_ST_LD",
+      "P4_ST_PT01"
+    ],
+    "alert_count": 623
+  },
+  {
+    "incident_id": "INC-002",
+    "start_time": "2022-08-12 22:58:14",
+    "end_time": "2022-08-12 22:58:14",
+    "duration_seconds": 1,
+    "peak_severity": "HIGH",
+    "peak_anomaly_score": -0.0312,
+    "peak_supervised_prob": 0.99,
+    "subsystems": [
+      "Process Unit 1: Water Treatment & Steam Boiler Feed Loop",
+      "Process Unit 4: Rotating Equipment & Turbine Drive"
+    ],
+    "flagged_sensors": [
+      "P4_HT_FD"
+    ],
+    "alert_count": 1
+  }
+]

@@ -1,0 +1,88 @@
+{
+  "operational_context": {
+    "application": "Simulated Oil & Gas Refinery Supervisory Control and Data Acquisition (SCADA)",
+    "sampling_frequency_hz": 1.0,
+    "eval_observations": 284400,
+    "eval_normal_count": 273016,
+    "eval_attack_count": 11384,
+    "base_attack_rate_percent": 4.0
+  },
+  "metrics_summary": {
+    "Isolation_Forest": {
+      "combined": {
+        "accuracy": 0.9294,
+        "precision": 0.1574,
+        "recall": 0.1756,
+        "f1_score": 0.166,
+        "roc_auc": 0.6257,
+        "pr_auc": 0.0984,
+        "false_positive_rate": 0.0392,
+        "false_negative_rate": 0.8244,
+        "confusion_matrix": {
+          "true_negatives": 262311,
+          "false_positives": 10705,
+          "false_negatives": 9385,
+          "true_positives": 1999
+        }
+      },
+      "threshold": 0.013229419465696642
+    },
+    "Random_Forest": {
+      "combined": {
+        "accuracy": 0.9619,
+        "precision": 0.5487,
+        "recall": 0.2707,
+        "f1_score": 0.3626,
+        "roc_auc": 0.7885,
+        "pr_auc": 0.3653,
+        "false_positive_rate": 0.0093,
+        "false_negative_rate": 0.7293,
+        "confusion_matrix": {
+          "true_negatives": 270481,
+          "false_positives": 2535,
+          "false_negatives": 8302,
+          "true_positives": 3082
+        }
+      }
+    },
+    "Logistic_Regression": {
+      "combined": {
+        "accuracy": 0.5965,
+        "precision": 0.0586,
+        "recall": 0.6031,
+        "f1_score": 0.1069,
+        "roc_auc": 0.6129,
+        "pr_auc": 0.0728,
+        "false_positive_rate": 0.4038,
+        "false_negative_rate": 0.3969,
+        "confusion_matrix": {
+          "true_negatives": 162766,
+          "false_positives": 110250,
+          "false_negatives": 4518,
+          "true_positives": 6866
+        }
+      }
+    }
+  },
+  "industrial_risk_tradeoff_analysis": {
+    "false_positives": {
+      "metric": "False Positive Rate (FPR)",
+      "consequences": "In an operational refinery, every false positive triggers an alarm on the control room HMI. If FPR is high (e.g., Logistic Regression at 40.38%), operators face alarm flooding and desensitization, leading to alarms being disabled or ignored. Furthermore, executing unverified emergency shutdowns costs refinery operators tens of thousands of dollars per minute in lost throughput.",
+      "model_comparison": {
+        "Isolation_Forest": "3.92% FPR (balanced operating point for zero-day behavioral detection)",
+        "Random_Forest": "0.93% FPR (exceptionally low false alarms when signatures match)",
+        "Logistic_Regression": "40.38% FPR (unacceptably high false alarm rate for production control rooms)"
+      }
+    },
+    "false_negatives": {
+      "metric": "False Negative Rate (FNR)",
+      "consequences": "A false negative occurs when malicious actuator tampering or sensor spoofing goes undetected. In an oil & gas refinery, undetected setpoint tampering can cause catalytic cracker thermal runaways, pipeline overpressurization, compressor surging, or catastrophic physical explosion (similar to Stuxnet or Triton).",
+      "model_comparison": {
+        "Isolation_Forest": "82.44% FNR on point-by-point basis (however, 100% of the 52 attack episodes had at least one point flagged)",
+        "Random_Forest": "72.93% FNR across unseen scenarios due to signature mismatch on novel actuator targets",
+        "Logistic_Regression": "39.69% FNR (highest point-level recall, but heavily compromised by false alarm flooding)"
+      }
+    }
+  },
+  "academic_conclusion": "No single model provides a silver bullet. An effective ICS defense architecture must deploy a hybrid approach: Isolation Forest provides continuous unsupervised baseline protection against novel zero-day perturbations, while Random Forest provides high-confidence signature alerts and explainable feature attribution."
+}

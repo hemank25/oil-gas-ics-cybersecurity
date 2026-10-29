@@ -1,0 +1,272 @@
+/* 
+  style.css
+  =========
+  Industrial SCADA / HMI Control Room Design System
+  Adhering to ISA-101 / ISA-18.2 Human-Machine Interface Guidelines.
+  Muted industrial palette, high readability, compact typography, professional engineering layout.
+*/
+
+/* Main Application Container & Typography */
+html, body, [class*="css"] {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1f2937;
+}
+
+/* Light Industrial Background */
+.stApp {
+    background-color: #f8fafc;
+}
+
+/* Sidebar Styling: Control Room Rail */
+[data-testid="stSidebar"] {
+    background-color: #f1f5f9;
+    border-right: 1px solid #cbd5e1;
+}
+
+[data-testid="stSidebar"] .stMarkdown h1,
+[data-testid="stSidebar"] .stMarkdown h2,
+[data-testid="stSidebar"] .stMarkdown h3 {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Industrial Header Cards */
+.industrial-header {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-left: 4px solid #2563eb;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+}
+
+.industrial-header h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.industrial-header p {
+    margin: 4px 0 0 0;
+    color: #475569;
+    font-size: 0.875rem;
+}
+
+/* Engineering KPI Cards */
+.kpi-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 12px 14px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.kpi-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.kpi-value {
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.kpi-sub {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* Data Source Origin Badges */
+.data-origin-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+
+.origin-live {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.origin-replay {
+    background-color: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+}
+
+.origin-synthetic {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.origin-saved {
+    background-color: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+}
+
+/* Industrial Status Badges (Color + Text Together) */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+}
+
+.status-online {
+    background-color: #ecfdf5;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.status-warning {
+    background-color: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}
+
+.status-alarm {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.status-offline {
+    background-color: #f8fafc;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+/* Tag Badges for Field Instrumentation */
+.tag-badge {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #cbd5e1;
+}
+
+/* Compact Tables */
+.stDataFrame {
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+}
+
+/* Radio Navigation Buttons in Sidebar */
+div[data-testid="stRadio"] > div {
+    gap: 4px;
+}
+
+div[data-testid="stRadio"] label {
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.15s ease-in-out;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+div[data-testid="stRadio"] label:hover {
+    background-color: #e2e8f0;
+}
+
+/* Engineering Top Status Bar */
+.scada-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 6px 14px;
+    margin-bottom: 12px;
+    font-size: 11px;
+}
+
+.scada-top-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-family: monospace;
+}
+
+/* Timeline Stage Card */
+.timeline-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #64748b;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+}
+
+.timeline-card.active {
+    border-left-color: #2563eb;
+    background: #eff6ff;
+}
+
+.timeline-card.alarm {
+    border-left-color: #dc2626;
+    background: #fef2f2;
+}
+
+.timeline-card.success {
+    border-left-color: #16a34a;
+    background: #ecfdf5;
+}
+
+/* Comparison Metric Diff Container */
+.diff-container {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 12px;
+}
+
+/* Engineering Table Header */
+.engineering-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    font-family: "JetBrains Mono", Consolas, monospace;
+}
+
+.engineering-table th {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 6px 8px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+    font-weight: 700;
+}
+
+.engineering-table td {
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+}
+
